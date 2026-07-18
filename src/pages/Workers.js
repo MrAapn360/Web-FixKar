@@ -21,12 +21,13 @@ function WorkerCard({ worker, onClick }) {
       </div>
 
       <div className="name-row" style={{ justifyContent: "space-between" }}>
-        <span className="rating">★ {worker.average_rating.toFixed(1)}</span>
-        <span className="muted">Rs {worker.hourly_rate}/hr</span>
+        <span className="rating">★ {(worker.average_rating ?? 0).toFixed(1)}</span>
+        <span className="muted">{worker.hourly_rate ? `Rs ${worker.hourly_rate}/hr` : "Rate not set"}</span>
       </div>
 
       <div className="muted">
-        {worker.service_area}, {worker.city} · {worker.experience_years} yrs
+        {[worker.service_area, worker.city].filter(Boolean).join(", ") || "Location not set"}
+        {worker.experience_years != null ? ` · ${worker.experience_years} yrs` : ""}
       </div>
 
       <div style={{ display: "flex", gap: "0.4rem" }}>

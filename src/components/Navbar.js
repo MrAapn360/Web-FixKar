@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout, unreadCount } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -12,6 +12,8 @@ export default function Navbar() {
 
   const dashboardLink =
     user?.role === "worker" ? "/worker/dashboard" : "/customer/dashboard";
+  const profileLink =
+    user?.role === "worker" ? "/worker/profile" : "/customer/profile";
 
   return (
     <nav className="navbar">
@@ -26,8 +28,32 @@ export default function Navbar() {
           {isAuthenticated ? (
             <>
               {user.role && <Link to={dashboardLink}>Dashboard</Link>}
-              <Link to="/notifications">Notifications</Link>
-              <span className="navbar-user">Hi, {user.full_name.split(" ")[0]}</span>
+              <Link to="/notifications" style={{ position: "relative" }}>
+                Notifications
+                {unreadCount > 0 && (
+                  <span
+                    style={{
+                      marginLeft: "0.35rem",
+                      background: "var(--danger)",
+                      color: "#fff",
+                      borderRadius: "999px",
+                      padding: "0.05rem 0.45rem",
+                      fontSize: "0.72rem",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
+              </Link>
+              {user.role && (
+                <Link to={profileLink} className="navbar-user" style={{ textDecoration: "underline" }}>
+                  Hi, {user.full_name.split(" ")[0]}
+                </Link>
+              )}
+              {!user.role && (
+                <span className="navbar-user">Hi, {user.full_name.split(" ")[0]}</span>
+              )}
               <button className="btn btn-sm btn-outline" onClick={handleLogout}>
                 Logout
               </button>

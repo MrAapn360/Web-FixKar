@@ -9,7 +9,14 @@ import Register from "./pages/Register";
 import RoleSelection from "./pages/RoleSelection";
 import Workers from "./pages/Workers";
 import WorkerProfile from "./pages/WorkerProfile";
-import Placeholder from "./pages/Placeholder";
+import BookService from "./pages/BookService";
+import BookingDetail from "./pages/BookingDetail";
+import CustomerDashboard from "./pages/CustomerDashboard";
+import WorkerDashboard from "./pages/WorkerDashboard";
+import PaymentMethodSettings from "./pages/PaymentMethodSettings";
+import CustomerProfile from "./pages/CustomerProfile";
+import WorkerProfileSettings from "./pages/WorkerProfileSettings";
+import Notifications from "./pages/Notifications";
 
 export default function App() {
   return (
@@ -37,7 +44,7 @@ export default function App() {
             path="/notifications"
             element={
               <ProtectedRoute>
-                <Placeholder title="Notifications" phase="Phase 9" />
+                <Notifications />
               </ProtectedRoute>
             }
           />
@@ -47,7 +54,7 @@ export default function App() {
             path="/customer/dashboard"
             element={
               <ProtectedRoute role="customer">
-                <Placeholder title="Customer Dashboard" phase="Phase 5" />
+                <CustomerDashboard />
               </ProtectedRoute>
             }
           />
@@ -55,7 +62,7 @@ export default function App() {
             path="/customer/book/:workerId"
             element={
               <ProtectedRoute role="customer">
-                <Placeholder title="Book a Service" phase="Phase 5" />
+                <BookService />
               </ProtectedRoute>
             }
           />
@@ -63,7 +70,7 @@ export default function App() {
             path="/customer/bookings/:id"
             element={
               <ProtectedRoute role="customer">
-                <Placeholder title="Booking Detail" phase="Phase 5" />
+                <BookingDetail />
               </ProtectedRoute>
             }
           />
@@ -71,7 +78,7 @@ export default function App() {
             path="/customer/profile"
             element={
               <ProtectedRoute role="customer">
-                <Placeholder title="My Profile" phase="Phase 8" />
+                <CustomerProfile />
               </ProtectedRoute>
             }
           />
@@ -81,7 +88,7 @@ export default function App() {
             path="/worker/dashboard"
             element={
               <ProtectedRoute role="worker">
-                <Placeholder title="Worker Dashboard" phase="Phase 5" />
+                <WorkerDashboard />
               </ProtectedRoute>
             }
           />
@@ -89,7 +96,15 @@ export default function App() {
             path="/worker/bookings/:id"
             element={
               <ProtectedRoute role="worker">
-                <Placeholder title="Booking Detail" phase="Phase 5" />
+                <BookingDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/worker/payment-method"
+            element={
+              <ProtectedRoute role="worker">
+                <PaymentMethodSettings />
               </ProtectedRoute>
             }
           />
@@ -97,7 +112,7 @@ export default function App() {
             path="/worker/profile-setup"
             element={
               <ProtectedRoute role="worker">
-                <Placeholder title="Set Up Your Worker Profile" phase="Phase 5" />
+                <WorkerProfileSettings />
               </ProtectedRoute>
             }
           />
@@ -105,7 +120,7 @@ export default function App() {
             path="/worker/profile"
             element={
               <ProtectedRoute role="worker">
-                <Placeholder title="My Worker Profile" phase="Phase 8" />
+                <WorkerProfileSettings />
               </ProtectedRoute>
             }
           />

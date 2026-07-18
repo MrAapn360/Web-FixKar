@@ -38,4 +38,85 @@ export const bookingService = {
       : api.post("/bookings", data).then((r) => r.data),
   list: () =>
     USE_MOCK ? mockApi.getBookings(getToken()) : api.get("/bookings").then((r) => r.data),
+  get: (id) =>
+    USE_MOCK
+      ? mockApi.getBooking(getToken(), id)
+      : api.get(`/bookings/${id}`).then((r) => r.data),
+  accept: (id) =>
+    USE_MOCK
+      ? mockApi.updateBookingStatus(getToken(), id, "accepted")
+      : api.post(`/bookings/${id}/accept`).then((r) => r.data),
+  reject: (id) =>
+    USE_MOCK
+      ? mockApi.updateBookingStatus(getToken(), id, "rejected")
+      : api.post(`/bookings/${id}/reject`).then((r) => r.data),
+  start: (id) =>
+    USE_MOCK
+      ? mockApi.updateBookingStatus(getToken(), id, "started")
+      : api.post(`/bookings/${id}/start`).then((r) => r.data),
+  complete: (id, data) =>
+    USE_MOCK
+      ? mockApi.updateBookingStatus(getToken(), id, "completed")
+      : api.post(`/bookings/${id}/complete`, data).then((r) => r.data),
+  cancel: (id) =>
+    USE_MOCK
+      ? mockApi.updateBookingStatus(getToken(), id, "cancelled")
+      : api.post(`/bookings/${id}/cancel`).then((r) => r.data),
+  review: (id, data) =>
+    USE_MOCK
+      ? mockApi.reviewBooking(getToken(), id, data)
+      : api.post(`/bookings/${id}/review`, data).then((r) => r.data),
+  pay: (id, data) =>
+    USE_MOCK
+      ? mockApi.payBooking(getToken(), id, data)
+      : api.post(`/bookings/${id}/payment`, data).then((r) => r.data),
+};
+
+export const paymentMethodService = {
+  get: () =>
+    USE_MOCK
+      ? mockApi.getPaymentMethod(getToken())
+      : api.get("/payment-method").then((r) => r.data),
+  update: (data) =>
+    USE_MOCK
+      ? mockApi.updatePaymentMethod(getToken(), data)
+      : api.put("/payment-method", data).then((r) => r.data),
+};
+
+export const notificationService = {
+  list: () =>
+    USE_MOCK ? mockApi.getNotifications(getToken()) : api.get("/notifications").then((r) => r.data),
+  unreadCount: () =>
+    USE_MOCK
+      ? mockApi.getUnreadCount(getToken())
+      : api.get("/notifications/unread-count").then((r) => r.data),
+  markRead: (id) =>
+    USE_MOCK
+      ? mockApi.markNotificationRead(getToken(), id)
+      : api.post(`/notifications/${id}/read`).then((r) => r.data),
+  markAllRead: () =>
+    USE_MOCK
+      ? mockApi.markAllNotificationsRead(getToken())
+      : api.post("/notifications/read-all").then((r) => r.data),
+};
+
+export const profileService = {
+  update: (data) =>
+    USE_MOCK
+      ? mockApi.updateProfile(getToken(), data)
+      : api.put("/profile", data).then((r) => r.data),
+  uploadPhoto: (file) => {
+    if (USE_MOCK) return mockApi.uploadPhoto(getToken(), file);
+    const form = new FormData();
+    form.append("photo", file);
+    return api
+      .post("/profile/photo", form, { headers: { "Content-Type": "multipart/form-data" } })
+      .then((r) => r.data);
+  },
+  updateWorkerProfile: (data) =>
+    USE_MOCK
+      ? mockApi.updateWorkerProfile(getToken(), data)
+      : api.put("/profile/worker", data).then((r) => r.data),
+  deleteAccount: () =>
+    USE_MOCK ? mockApi.deleteAccount(getToken()) : api.delete("/profile").then((r) => r.data),
 };
