@@ -26,9 +26,10 @@ export default function RoleSelection() {
 
   return (
     <div className="page container">
-      <h2 className="center" style={{ marginTop: "2rem" }}>
-        How will you use FixKar?
-      </h2>
+      <div className="center" style={{ marginTop: "2rem" }}>
+        <img src="/app-icon.svg" alt="FixKar" style={{ width: 64, height: 64 }} />
+      </div>
+      <h2 className="center mt-1">How will you use FixKar?</h2>
       <p className="muted center">You can only choose once, so pick the one that fits.</p>
 
       {error && (
@@ -42,7 +43,7 @@ export default function RoleSelection() {
           className="card role-card"
           onClick={() => !submitting && choose("customer")}
         >
-          <div className="emoji">🙋</div>
+          <img src="/mascots/customer.svg" alt="" />
           <h3>I'm a Customer</h3>
           <p className="muted">I want to find and book home services.</p>
         </div>
@@ -51,7 +52,7 @@ export default function RoleSelection() {
           className="card role-card"
           onClick={() => !submitting && choose("worker")}
         >
-          <div className="emoji">👷</div>
+          <img src="/mascots/worker.svg" alt="" />
           <h3>I'm a Worker</h3>
           <p className="muted">I provide services and want to receive bookings.</p>
         </div>

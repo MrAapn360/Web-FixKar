@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5B7CFF"/>
+      <stop offset="55%" stop-color="#3355F5"/>
+      <stop offset="100%" stop-color="#1B34C4"/>
+    </linearGradient>
+    <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6E8CFF"/>
+      <stop offset="100%" stop-color="#3355F5"/>
+    </linearGradient>
+    <linearGradient id="houseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EAF0FF"/>
+    </linearGradient>
+  </defs>
+
+  <path d="M256 30 L432 96 V256 C432 372 358 452 256 490 C154 452 80 372 80 256 V96 Z"
+        fill="url(#shieldGrad)" stroke="#16249E" stroke-width="6"/>
+  <path d="M256 30 L432 96 V256 C432 372 358 452 256 490 C154 452 80 372 80 256 V96 Z"
+        fill="none" stroke="#8FA6FF" stroke-width="3" opacity="0.6"
+        transform="scale(0.965)" transform-origin="256 260"/>
+
+  <path d="M170 210 L256 150 L342 210 V320 L170 320 Z" fill="url(#houseGrad)" stroke="#B9C8FF" stroke-width="3"/>
+  <path d="M154 218 L256 140 L358 218 L340 240 L256 178 L172 240 Z" fill="url(#roofGrad)" stroke="#1B34C4" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M244 128 L256 100 L268 128 Z" fill="#FFC94A" stroke="#E0A82A" stroke-width="2"/>
+
+  <rect x="222" y="252" width="30" height="30" rx="4" fill="#3355F5"/>
+  <rect x="258" y="252" width="30" height="30" rx="4" fill="#3355F5"/>
+  <rect x="222" y="288" width="30" height="30" rx="4" fill="#3355F5"/>
+  <rect x="258" y="288" width="30" height="30" rx="4" fill="#3355F5"/>
+
+  <g transform="translate(206,300) rotate(-28)">
+    <rect x="0" y="0" width="150" height="26" rx="13" fill="#FFFFFF" stroke="#D7DFFF" stroke-width="3"/>
+    <circle cx="150" cy="13" r="20" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+    <circle cx="150" cy="13" r="20" fill="none" stroke="#D7DFFF" stroke-width="3"/>
+    <circle cx="8" cy="13" r="9" fill="#3355F5"/>
+  </g>
+</svg>

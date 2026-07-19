@@ -38,7 +38,10 @@ export default function Login() {
   return (
     <div className="page container">
       <div className="card form-card">
-        <h2 className="center">Welcome back</h2>
+        <div className="center">
+          <img src="/app-icon.svg" alt="FixKar" style={{ width: 56, height: 56 }} />
+        </div>
+        <h2 className="center mt-1">Welcome back</h2>
         <p className="muted center mt-1" style={{ marginBottom: "1.5rem" }}>
           Log in to your FixKar account
         </p>

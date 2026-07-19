@@ -1,0 +1,26 @@
+<svg width="220" height="260" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cu-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8FA6FF"/>
+      <stop offset="100%" stop-color="#3355F5"/>
+    </linearGradient>
+    <linearGradient id="cu-head" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F0B274"/>
+      <stop offset="100%" stop-color="#D6893C"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="110" cy="244" rx="70" ry="12" fill="#1B34C4" opacity="0.1"/>
+  <rect x="65" y="120" width="90" height="105" rx="34" fill="url(#cu-body)"/>
+  <circle cx="110" cy="70" r="48" fill="url(#cu-head)"/>
+  <path d="M68 50 Q110 14 152 50 L150 68 Q110 40 70 68 Z" fill="#2A2E3A"/>
+  <circle cx="94" cy="72" r="6" fill="#0E1330"/>
+  <circle cx="126" cy="72" r="6" fill="#0E1330"/>
+  <path d="M96 90 Q110 100 124 90" fill="none" stroke="#0E1330" stroke-width="4" stroke-linecap="round"/>
+  <rect x="40" y="128" width="24" height="66" rx="12" fill="#2A46D6"/>
+  <rect x="156" y="128" width="24" height="66" rx="12" fill="#2A46D6"/>
+  <circle cx="52" cy="196" r="13" fill="#F0B274"/>
+  <circle cx="168" cy="150" r="13" fill="#F0B274"/>
+  <rect x="150" y="118" width="46" height="56" rx="10" fill="#FFFFFF" stroke="#B9C8FF" stroke-width="3"/>
+  <rect x="158" y="128" width="30" height="6" rx="3" fill="#B9C8FF"/>
+  <rect x="158" y="140" width="30" height="6" rx="3" fill="#B9C8FF"/>
+</svg>
