@@ -7,7 +7,8 @@ import Splash from "./components/Splash";
 
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
+import CustomerRegister from "./pages/CustomerRegister";
+import WorkerRegister from "./pages/WorkerRegister";
 import RoleSelection from "./pages/RoleSelection";
 import Workers from "./pages/Workers";
 import WorkerProfile from "./pages/WorkerProfile";
@@ -43,7 +44,8 @@ function AppShell() {
         {/* ---- Public ---- */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<CustomerRegister />} />
+        <Route path="/register/worker" element={<WorkerRegister />} />
         <Route path="/workers" element={<Workers />} />
         <Route path="/workers/:id" element={<WorkerProfile />} />
 

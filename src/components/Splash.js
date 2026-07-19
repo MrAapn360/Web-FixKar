@@ -8,6 +8,9 @@ export default function Splash() {
         Fix<span>Kar</span>
       </div>
       <div className="splash-tagline">Your Local Fix, Sorted.</div>
+      <div className="splash-tagline" style={{ opacity: 0.5, fontSize: "0.7rem", marginTop: "0.5rem" }}>
+        build 2026-07-19b
+      </div>
     </div>
   );
 }

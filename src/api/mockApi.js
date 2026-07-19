@@ -69,7 +69,7 @@ const apiError = (status, message) => {
 
 export const mockApi = {
   // ---- Auth ----
-  async register({ full_name, email, password }) {
+  async register({ full_name, email, password, role, worker_profile }) {
     await delay();
     if (users.some((u) => u.email === email)) {
       throw apiError(422, "Email already registered.");
@@ -79,12 +79,26 @@ export const mockApi = {
       full_name,
       email,
       password,
-      role: null, // chosen at role-selection
-      city: null,
+      role: role || null, // null -> falls back to /role-selection
+      city: worker_profile?.city || null,
       phone: null,
       photo_path: null,
     };
     users.push(user);
+
+    if (role === "worker" && worker_profile) {
+      workerProfiles[user.id] = {
+        user_id: user.id,
+        category: worker_profile.category,
+        bio: worker_profile.bio || null,
+        skills: worker_profile.skills || [],
+        experience_years: worker_profile.experience_years ?? null,
+        hourly_rate: worker_profile.hourly_rate ?? null,
+        service_area: worker_profile.service_area || null,
+        is_available: true,
+      };
+    }
+
     return { token: fakeToken(user), user: publicUser(user) };
   },
 
@@ -120,9 +134,38 @@ export const mockApi = {
   },
 
   // ---- Workers (public) ----
+  // Merges the static demo roster with real accounts that signed up as
+  // workers, so newly registered workers actually show up to customers
+  // instead of only existing in the seed data.
+  _allWorkers() {
+    const registered = users
+      .filter((u) => u.role === "worker" && workerProfiles[u.id])
+      .map((u) => {
+        const p = workerProfiles[u.id];
+        return {
+          id: u.id,
+          full_name: u.full_name,
+          city: u.city || p.city || null,
+          photo_path: u.photo_path || null,
+          category: p.category,
+          bio: p.bio || "",
+          skills: p.skills || [],
+          experience_years: p.experience_years ?? 0,
+          hourly_rate: p.hourly_rate ?? 0,
+          service_area: p.service_area || "",
+          is_available: p.is_available ?? true,
+          is_verified: false,
+          average_rating: 0,
+          total_reviews: 0,
+          total_jobs_done: 0,
+        };
+      });
+    return [...MOCK_WORKERS, ...registered];
+  },
+
   async getWorkers({ category, city, search } = {}) {
     await delay();
-    let list = [...MOCK_WORKERS];
+    let list = this._allWorkers();
     if (category) list = list.filter((w) => w.category === category);
     if (city) list = list.filter((w) => w.city === city);
     if (search) {
@@ -139,7 +182,7 @@ export const mockApi = {
 
   async getWorker(id) {
     await delay();
-    const worker = MOCK_WORKERS.find((w) => w.id === Number(id));
+    const worker = this._allWorkers().find((w) => w.id === Number(id));
     if (!worker) throw apiError(404);
     return worker;
   },
@@ -154,7 +197,8 @@ export const mockApi = {
     await delay();
     const id = Number(String(token).replace("mock-token-", ""));
     const customer = users.find((u) => u.id === id);
-    const worker = MOCK_WORKERS.find((w) => w.id === Number(payload.worker_id));
+    const worker = this._allWorkers().find((w) => w.id === Number(payload.worker_id));
+    if (!worker) throw apiError(404, "This worker no longer exists.");
     const booking = {
       id: nextBookingId++,
       status: "pending",

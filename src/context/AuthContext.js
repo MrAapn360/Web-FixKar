@@ -32,8 +32,10 @@ export function AuthProvider({ children }) {
     return user;
   }, []);
 
-  const register = useCallback(async (full_name, email, password) => {
-    const { token, user } = await authService.register({ full_name, email, password });
+  // extra: { role?, worker_profile? } — passing role sets it at signup so
+  // the new account lands straight in its dashboard.
+  const register = useCallback(async (full_name, email, password, extra = {}) => {
+    const { token, user } = await authService.register({ full_name, email, password, ...extra });
     setToken(token);
     setUser(user);
     return user;

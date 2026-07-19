@@ -75,7 +75,8 @@ export default function Login() {
         </form>
 
         <p className="form-footer">
-          No account? <Link to="/register">Sign up</Link>
+          No account? <Link to="/register">Sign up as a customer</Link> or{" "}
+          <Link to="/register/worker">as a worker</Link>
         </p>
         <p className="muted center mt-2" style={{ fontSize: "0.8rem" }}>
           Demo: customer@fixkar.test / worker@fixkar.test — password: <b>password</b>

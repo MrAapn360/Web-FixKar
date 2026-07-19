@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { CATEGORIES } from "../api/mockData";
+import { useAuth } from "../context/AuthContext";
 
 const PROMO = {
   Electrician: {
@@ -49,8 +50,18 @@ const PROMO = {
 
 export default function Landing() {
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
   const [activeCategory, setActiveCategory] = useState("All");
   const [search, setSearch] = useState("");
+
+  // A logged-in user with a role already set has no business seeing the
+  // marketing landing page or the "join as" cards — send them straight to
+  // their real dashboard so login always lands somewhere useful.
+  if (!loading && user?.role) {
+    return (
+      <Navigate to={user.role === "worker" ? "/worker/dashboard" : "/customer/dashboard"} replace />
+    );
+  }
 
   const goToWorkers = (category, searchTerm) => {
     const params = new URLSearchParams();
@@ -132,14 +143,19 @@ export default function Landing() {
           })}
         </div>
 
-        <div className="center mt-2" style={{ margin: "3rem 0 1rem" }}>
-          <h2>Are you a worker?</h2>
-          <p className="muted">
-            Create a profile, receive booking requests, and grow your rating.
-          </p>
-          <button className="btn btn-primary mt-1" onClick={() => navigate("/register")}>
-            Join as a Worker
-          </button>
+        <div className="role-grid mt-2" style={{ margin: "3rem auto 1rem" }}>
+          <div className="card role-card" onClick={() => navigate("/register")}>
+            <img src="/mascots/customer.svg" alt="" />
+            <h3>I need a service</h3>
+            <p className="muted">Sign up as a customer to find and book trusted workers.</p>
+            <span className="btn btn-primary btn-sm mt-1">Join as a Customer</span>
+          </div>
+          <div className="card role-card" onClick={() => navigate("/register/worker")}>
+            <img src="/mascots/worker.svg" alt="" />
+            <h3>I offer a service</h3>
+            <p className="muted">Sign up as a worker to receive bookings and grow your rating.</p>
+            <span className="btn btn-primary btn-sm mt-1">Join as a Worker</span>
+          </div>
         </div>
       </div>
     </div>

@@ -6,6 +6,10 @@ import api, { USE_MOCK, getToken } from "./client";
 import { mockApi } from "./mockApi";
 
 export const authService = {
+  // data: { full_name, email, password, role?, worker_profile? }
+  // Passing role (+ worker_profile for workers) sets everything up in one
+  // request, so new signups land straight in their dashboard — no separate
+  // /role-selection detour.
   register: (data) =>
     USE_MOCK ? mockApi.register(data) : api.post("/register", data).then((r) => r.data),
   login: (data) =>

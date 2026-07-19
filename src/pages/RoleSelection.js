@@ -1,12 +1,23 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+// Fallback page for the rare account that reaches the app with no role set
+// (e.g. an older account from before signup collected role directly). Every
+// current signup flow (CustomerRegister / WorkerRegister) sets role at
+// registration, so most users should never see this page — if a user with a
+// role already set lands here (stale link, back button, etc.), send them
+// straight to their real dashboard instead of rendering the picker.
 export default function RoleSelection() {
-  const { selectRole } = useAuth();
+  const { user, selectRole } = useAuth();
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  if (user?.role) {
+    const home = user.role === "worker" ? "/worker/dashboard" : "/customer/dashboard";
+    return <Navigate to={home} replace />;
+  }
 
   const choose = async (role) => {
     setSubmitting(true);
