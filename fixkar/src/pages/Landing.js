@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { CATEGORIES } from "../api/mockData";
 import { useAuth } from "../context/AuthContext";
+import AppShowcase from "../components/AppShowcase";
 
 const PROMO = {
   Electrician: {
@@ -99,7 +100,11 @@ export default function Landing() {
             Find a Worker
           </button>
         </section>
+      </div>
 
+      <AppShowcase />
+
+      <div className="container" style={{ paddingBottom: "3rem" }}>
         <div className="category-chips">
           <button
             type="button"

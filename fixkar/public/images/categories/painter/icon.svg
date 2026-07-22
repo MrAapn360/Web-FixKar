@@ -1,0 +1,17 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cat-painter-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3e3ff"/>
+      <stop offset="100%" stop-color="#e6cdff"/>
+    </linearGradient>
+    <linearGradient id="cat-painter-icon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b46ee8"/>
+      <stop offset="100%" stop-color="#8a3bc4"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="36" fill="url(#cat-painter-bg)"/>
+  <rect x="86" y="46" width="28" height="46" rx="6" fill="url(#cat-painter-icon)" stroke="#5f2591" stroke-width="3"/>
+  <path d="M70 92 h60 v28 c0 12 -10 20 -30 20 s-30 -8 -30 -20 Z" fill="url(#cat-painter-icon)" stroke="#5f2591" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M100 140 q-4 20 -18 30" stroke="#5f2591" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="78" cy="176" r="7" fill="#b46ee8"/>
+</svg>

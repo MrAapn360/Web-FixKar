@@ -1,0 +1,17 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cat-laborer-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe9cf"/>
+      <stop offset="100%" stop-color="#ffdba8"/>
+    </linearGradient>
+    <linearGradient id="cat-laborer-icon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0a94e"/>
+      <stop offset="100%" stop-color="#c9791a"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="36" fill="url(#cat-laborer-bg)"/>
+  <rect x="55" y="95" width="42" height="34" rx="4" fill="url(#cat-laborer-icon)" stroke="#8a5410" stroke-width="3"/>
+  <rect x="103" y="95" width="42" height="34" rx="4" fill="url(#cat-laborer-icon)" stroke="#8a5410" stroke-width="3"/>
+  <rect x="79" y="129" width="42" height="34" rx="4" fill="url(#cat-laborer-icon)" stroke="#8a5410" stroke-width="3"/>
+  <path d="M60 85 q40 -30 80 0" stroke="#8a5410" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>

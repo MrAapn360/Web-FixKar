@@ -16,9 +16,12 @@ export default function Login() {
     if (!user.role) return navigate("/role-selection", { replace: true });
     const from = location.state?.from?.pathname;
     if (from) return navigate(from, { replace: true });
-    navigate(user.role === "worker" ? "/worker/dashboard" : "/customer/dashboard", {
-      replace: true,
-    });
+    navigate(
+      user.role === "worker" ? "/worker/dashboard" : "/customer/dashboard",
+      {
+        replace: true,
+      },
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -29,7 +32,9 @@ export default function Login() {
       const user = await login(email, password);
       redirectAfterLogin(user);
     } catch (err) {
-      setError(err?.response?.data?.message || "Login failed. Check your credentials.");
+      setError(
+        err?.response?.data?.message || "Login failed. Check your credentials.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -39,7 +44,11 @@ export default function Login() {
     <div className="page container">
       <div className="card form-card">
         <div className="center">
-          <img src="/app-icon.svg" alt="FixKar" style={{ width: 56, height: 56 }} />
+          <img
+            src="/app-icon.svg"
+            alt="FixKar"
+            style={{ width: 56, height: 56 }}
+          />
         </div>
         <h2 className="center mt-1">Welcome back</h2>
         <p className="muted center mt-1" style={{ marginBottom: "1.5rem" }}>
@@ -69,7 +78,11 @@ export default function Login() {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
+          <button
+            type="submit"
+            className="btn btn-primary btn-block"
+            disabled={submitting}
+          >
             {submitting ? "Logging in…" : "Log In"}
           </button>
         </form>
@@ -77,9 +90,6 @@ export default function Login() {
         <p className="form-footer">
           No account? <Link to="/register">Sign up as a customer</Link> or{" "}
           <Link to="/register/worker">as a worker</Link>
-        </p>
-        <p className="muted center mt-2" style={{ fontSize: "0.8rem" }}>
-          Demo: customer@fixkar.test / worker@fixkar.test — password: <b>password</b>
         </p>
       </div>
     </div>

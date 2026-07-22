@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { workerService } from "../api/services";
 import { CATEGORIES, CITIES } from "../api/mockData";
+import { categoryIcon } from "../api/categoryImages";
 
 function WorkerCard({ worker, onClick }) {
   const initials = worker.full_name
@@ -9,30 +10,49 @@ function WorkerCard({ worker, onClick }) {
     .map((n) => n[0])
     .slice(0, 2)
     .join("");
+  const icon = categoryIcon(worker.category);
 
   return (
-    <div className="card worker-card" onClick={onClick} style={{ cursor: "pointer" }}>
-      <div className="name-row">
-        <div className="avatar">{initials}</div>
-        <div>
-          <div style={{ fontWeight: 700 }}>{worker.full_name}</div>
+    <div className="card worker-card-v2" onClick={onClick}>
+      <div className="worker-card-v2-top">
+        <div className="worker-card-v2-avatar-frame">
+          {worker.photo_path ? (
+            <img src={worker.photo_path} alt={worker.full_name} className="worker-card-v2-photo" />
+          ) : (
+            <div className="worker-card-v2-initials">{initials}</div>
+          )}
+          {icon && (
+            <img src={icon} alt="" className="worker-card-v2-service-badge" title={worker.category} />
+          )}
+          <span
+            className={`worker-card-v2-status-dot ${worker.is_available ? "is-available" : "is-busy"}`}
+            title={worker.is_available ? "Available" : "Busy"}
+          />
+        </div>
+
+        <div className="worker-card-v2-info">
+          <div className="worker-card-v2-name-row">
+            <span className="worker-card-v2-name">{worker.full_name}</span>
+            {worker.is_verified && <span className="badge badge-verified">✓ Verified</span>}
+          </div>
           <div className="muted">{worker.category}</div>
+          <div className="worker-card-v2-rating">
+            <span className="rating">★ {(worker.average_rating ?? 0).toFixed(1)}</span>
+            <span className="muted">({worker.total_reviews ?? 0})</span>
+          </div>
         </div>
       </div>
 
-      <div className="name-row" style={{ justifyContent: "space-between" }}>
-        <span className="rating">★ {(worker.average_rating ?? 0).toFixed(1)}</span>
-        <span className="muted">{worker.hourly_rate ? `Rs ${worker.hourly_rate}/hr` : "Rate not set"}</span>
-      </div>
+      <div className="worker-card-v2-divider" />
 
-      <div className="muted">
-        {[worker.service_area, worker.city].filter(Boolean).join(", ") || "Location not set"}
-        {worker.experience_years != null ? ` · ${worker.experience_years} yrs` : ""}
-      </div>
-
-      <div style={{ display: "flex", gap: "0.4rem" }}>
-        {worker.is_verified && <span className="badge badge-verified">✓ Verified</span>}
-        <span className="badge">{worker.is_available ? "Available" : "Busy"}</span>
+      <div className="worker-card-v2-footer">
+        <div className="muted">
+          {[worker.service_area, worker.city].filter(Boolean).join(", ") || "Location not set"}
+          {worker.experience_years != null ? ` · ${worker.experience_years} yrs exp` : ""}
+        </div>
+        <div className="worker-card-v2-rate">
+          {worker.hourly_rate ? `Rs ${worker.hourly_rate}/hr` : "Rate not set"}
+        </div>
       </div>
     </div>
   );

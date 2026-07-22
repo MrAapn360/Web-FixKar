@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { categoryIcon } from "../api/categoryImages";
 
 // Maps booking status -> badge class + friendly label, shared by both dashboards.
 export const STATUS_LABEL = {
@@ -28,24 +29,31 @@ export default function BookingCard({ booking, viewerRole }) {
   const otherPartyLabel = viewerRole === "worker" ? "Customer" : "Worker";
   const otherPartyName =
     viewerRole === "worker" ? booking.customer_name : booking.worker_name;
+  const icon = categoryIcon(booking.category);
 
   return (
-    <Link to={detailPath} className="card booking-card">
-      <div className="name-row" style={{ justifyContent: "space-between" }}>
-        <div style={{ fontWeight: 700 }}>{booking.category}</div>
-        <span className={`badge ${STATUS_CLASS[booking.status] || ""}`}>
-          {STATUS_LABEL[booking.status] || booking.status}
-        </span>
+    <Link to={detailPath} className={`card booking-card-v2 ${STATUS_CLASS[booking.status] || ""}`}>
+      <div className="booking-card-v2-icon">
+        {icon ? <img src={icon} alt="" /> : <span>{(booking.category || "?")[0]}</span>}
       </div>
-      <div className="muted mt-1">
-        {otherPartyLabel}: {otherPartyName || "—"}
-      </div>
-      {booking.address && <div className="muted">{booking.address}</div>}
-      {booking.scheduled_at && (
-        <div className="muted">
-          Scheduled: {new Date(booking.scheduled_at).toLocaleString()}
+
+      <div className="booking-card-v2-body">
+        <div className="booking-card-v2-top">
+          <div className="booking-card-v2-title">{booking.category}</div>
+          <span className={`badge ${STATUS_CLASS[booking.status] || ""}`}>
+            {STATUS_LABEL[booking.status] || booking.status}
+          </span>
         </div>
-      )}
+        <div className="muted booking-card-v2-meta">
+          {otherPartyLabel}: {otherPartyName || "—"}
+        </div>
+        {booking.address && <div className="muted booking-card-v2-meta">{booking.address}</div>}
+        {booking.scheduled_at && (
+          <div className="muted booking-card-v2-meta">
+            Scheduled: {new Date(booking.scheduled_at).toLocaleString()}
+          </div>
+        )}
+      </div>
     </Link>
   );
 }
