@@ -3,7 +3,7 @@
 export default function Splash() {
   return (
     <div className="splash">
-      <img src="/app-icon.svg" alt="FixKar" />
+      <img src="/app-logo.png" alt="FixKar" />
       <div className="splash-word">
         Fix<span>Kar</span>
       </div>

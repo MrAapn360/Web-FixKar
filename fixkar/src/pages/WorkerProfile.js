@@ -118,8 +118,12 @@ export default function WorkerProfile() {
         <div className="card worker-profile-v2-header">
           <div className="worker-profile-v2-top">
             <div className="worker-profile-v2-avatar-frame">
-              {worker.photo_path ? (
-                <img src={worker.photo_path} alt={worker.full_name} className="worker-profile-v2-photo" />
+              {worker.photo_url || worker.photo_path ? (
+                <img
+                  src={worker.photo_url || worker.photo_path}
+                  alt={worker.full_name}
+                  className="worker-profile-v2-photo"
+                />
               ) : (
                 <div className="worker-profile-v2-initials">{initials}</div>
               )}

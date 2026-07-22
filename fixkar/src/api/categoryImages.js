@@ -16,4 +16,11 @@ export function categoryIcon(category) {
   return slug ? `/images/categories/${slug}/icon.svg` : null;
 }
 
+// Full-body 3D-style mascot illustration for a category — same character
+// art used on the mobile app's home screen and promo cards.
+export function categoryMascot(category) {
+  const slug = SLUGS[category];
+  return slug ? `/mascots/${slug}.svg` : null;
+}
+
 export default SLUGS;

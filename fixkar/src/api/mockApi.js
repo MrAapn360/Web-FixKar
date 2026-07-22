@@ -54,7 +54,9 @@ const pushNotification = (userId, type, relatedId, title, body) => {
 const publicUser = (u) => {
   if (!u) return null;
   const { password, ...rest } = u;
-  return rest;
+  // Mirrors the real backend's User::photo_url accessor so every response
+  // shape (mock or real) always carries a ready-to-use photo URL.
+  return { ...rest, photo_url: rest.photo_url ?? rest.photo_path ?? null };
 };
 
 const fakeToken = (u) => `mock-token-${u.id}`;
@@ -147,6 +149,7 @@ export const mockApi = {
           full_name: u.full_name,
           city: u.city || p.city || null,
           photo_path: u.photo_path || null,
+          photo_url: u.photo_path || null,
           category: p.category,
           bio: p.bio || "",
           skills: p.skills || [],

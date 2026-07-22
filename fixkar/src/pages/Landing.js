@@ -2,58 +2,64 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { CATEGORIES } from "../api/mockData";
 import { useAuth } from "../context/AuthContext";
+import { categoryMascot } from "../api/categoryImages";
 import AppShowcase from "../components/AppShowcase";
 
-const PROMO = {
-  Electrician: {
-    bg: "linear-gradient(135deg, #dcE6ff 0%, #c6d6ff 100%)",
-    trust: "Trusted Electrician Help",
-    headline: "Expert Electricians You Can Trust",
-    mascot: "/mascots/electrician.svg",
+const STEPS = [
+  {
+    icon: "📋",
+    title: "Tell us what you need",
+    text: "Pick a service category and describe the job — takes less than a minute.",
   },
-  Plumber: {
-    bg: "linear-gradient(135deg, #d3f7f2 0%, #baeee7 100%)",
-    trust: "Trusted Plumber Help",
-    headline: "Fast & Reliable Plumbing Service",
-    mascot: "/mascots/plumber.svg",
+  {
+    icon: "🧰",
+    title: "A worker gets to it fast",
+    text: "Nearby verified workers see your request and confirm availability.",
   },
-  Painter: {
-    bg: "linear-gradient(135deg, #f3e3ff 0%, #e6cdff 100%)",
-    trust: "Trusted Painter Help",
-    headline: "Professional Interior & Exterior Painting",
-    mascot: "/mascots/painter.svg",
+  {
+    icon: "✅",
+    title: "Job done, pay after",
+    text: "Track progress in real time and pay once the work is complete.",
   },
-  Carpenter: {
-    bg: "linear-gradient(135deg, #ffe9d3 0%, #ffd9b3 100%)",
-    trust: "Trusted Carpenter Help",
-    headline: "Custom Woodwork & Furniture Repair",
-    mascot: "/mascots/carpenter.svg",
+];
+
+const TESTIMONIALS = [
+  {
+    name: "Ahmed S.",
+    rating: 5,
+    quote: "The electrician who came was professional, on time, and fixed the wiring quickly. Would book again.",
   },
-  "AC Technician": {
-    bg: "linear-gradient(135deg, #d3edff 0%, #b8e2ff 100%)",
-    trust: "Trusted AC Technician Help",
-    headline: "AC Installation & Cooling Repair",
-    mascot: "/mascots/ac-technician.svg",
+  {
+    name: "Sana K.",
+    rating: 4,
+    quote: "Good work overall — the plumber was polite and explained everything before starting.",
   },
-  Mechanic: {
-    bg: "linear-gradient(135deg, #e2e5ea 0%, #cfd4db 100%)",
-    trust: "Trusted Mechanic Help",
-    headline: "Home Car Service & Diagnostics",
-    mascot: "/mascots/mechanic.svg",
+  {
+    name: "Usman R.",
+    rating: 5,
+    quote: "Fixed a bad leak same day at a fair price. FixKar made it so easy to find someone nearby.",
   },
-  Laborer: {
-    bg: "linear-gradient(135deg, #ffe9cf 0%, #ffdba8 100%)",
-    trust: "Trusted Laborer Help",
-    headline: "Reliable Shifting & Loading Work",
-    mascot: "/mascots/laborer.svg",
+  {
+    name: "Mehwish A.",
+    rating: 5,
+    quote: "Booked a painter in minutes and the whole job was done cleanly and on schedule.",
   },
-};
+];
+
+const STATS = [
+  { value: "1.2K+", label: "Jobs completed" },
+  { value: "300+", label: "Verified workers" },
+  { value: "7", label: "Service categories" },
+  { value: "4.6★", label: "Average rating" },
+];
 
 export default function Landing() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [activeCategory, setActiveCategory] = useState("All");
   const [search, setSearch] = useState("");
+  const [quoteCategory, setQuoteCategory] = useState("");
+  const [quoteArea, setQuoteArea] = useState("");
 
   // A logged-in user with a role already set has no business seeing the
   // marketing landing page or the "join as" cards — send them straight to
@@ -75,12 +81,64 @@ export default function Landing() {
     if (e.key === "Enter") goToWorkers(activeCategory, search);
   };
 
+  const handleQuoteSubmit = (e) => {
+    e.preventDefault();
+    goToWorkers(quoteCategory, quoteArea);
+  };
+
   const visibleCategories =
     activeCategory === "All" ? CATEGORIES : CATEGORIES.filter((c) => c === activeCategory);
 
   return (
     <div className="page">
-      <div className="container" style={{ paddingBottom: "3rem" }}>
+      {/* ---------- Hero ---------- */}
+      <section className="hero-v2">
+        <div className="hero-v2-inner container">
+          <div className="hero-v2-copy">
+            <span className="promo-badge">24/7 Support</span>
+            <h1>Full range of home repair services</h1>
+            <p className="muted hero-v2-sub">
+              FixKar connects you with trusted electricians, plumbers, carpenters, AC
+              technicians and more across Pakistan. Book in minutes, pay after the job.
+            </p>
+
+            <form className="hero-v2-quote-form" onSubmit={handleQuoteSubmit}>
+              <select value={quoteCategory} onChange={(e) => setQuoteCategory(e.target.value)}>
+                <option value="">Select service…</option>
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+              <input
+                placeholder="Your area / city"
+                value={quoteArea}
+                onChange={(e) => setQuoteArea(e.target.value)}
+              />
+              <button type="submit" className="btn btn-primary">
+                Find a Worker
+              </button>
+            </form>
+          </div>
+
+          <div className="hero-v2-art">
+            <img src="/images/hero-worker.svg" alt="FixKar worker" />
+          </div>
+        </div>
+
+        <div className="hero-v2-stats container">
+          {STATS.map((s) => (
+            <div key={s.label} className="hero-v2-stat">
+              <div className="hero-v2-stat-value">{s.value}</div>
+              <div className="hero-v2-stat-label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------- Search + category showcase ---------- */}
+      <div className="container" style={{ paddingTop: "2.5rem" }}>
         <div className="home-search">
           <input
             placeholder="Find your needed service…"
@@ -90,21 +148,6 @@ export default function Landing() {
           />
         </div>
 
-        <section className="hero">
-          <h1>Book Home Services in Minutes</h1>
-          <p>
-            FixKar connects you with trusted electricians, plumbers, carpenters, AC
-            technicians and more across Pakistan. Book in minutes, pay after the job.
-          </p>
-          <button className="btn btn-primary" onClick={() => goToWorkers(activeCategory, search)}>
-            Find a Worker
-          </button>
-        </section>
-      </div>
-
-      <AppShowcase />
-
-      <div className="container" style={{ paddingBottom: "3rem" }}>
         <div className="category-chips">
           <button
             type="button"
@@ -125,29 +168,70 @@ export default function Landing() {
           ))}
         </div>
 
-        <div className="promo-list">
-          {visibleCategories.map((cat) => {
-            const promo = PROMO[cat];
-            if (!promo) return null;
-            return (
-              <div key={cat} className="promo-card" style={{ background: promo.bg }}>
-                <div className="promo-card-content">
-                  <span className="promo-badge">24/7 Support</span>
-                  <div className="promo-trust">🛡️ {promo.trust}</div>
-                  <h3>{promo.headline}</h3>
-                  <button
-                    className="btn btn-primary btn-sm"
-                    onClick={() => goToWorkers(cat)}
-                  >
-                    Book Now
-                  </button>
-                </div>
-                <img src={promo.mascot} alt={cat} />
-              </div>
-            );
-          })}
+        <div className="section-title">
+          <h2>Browse by service</h2>
+          <p className="muted">Tap a category to see available workers near you.</p>
         </div>
+        <div className="category-showcase-grid">
+          {visibleCategories.map((cat) => (
+            <div key={cat} className="category-showcase-card" onClick={() => goToWorkers(cat)}>
+              <img src={categoryMascot(cat)} alt="" className="category-showcase-mascot" />
+              <div className="category-showcase-name">{cat}</div>
+              <div className="muted category-showcase-cta">Book now →</div>
+            </div>
+          ))}
+        </div>
+      </div>
 
+      {/* ---------- App showcase (3-phone mockup) ---------- */}
+      <AppShowcase />
+
+      {/* ---------- How it works ---------- */}
+      <section className="how-it-works">
+        <div className="container">
+          <div className="section-title center">
+            <h2>How FixKar Works</h2>
+            <p className="muted">From request to finished job in three simple steps.</p>
+          </div>
+          <div className="how-it-works-grid">
+            {STEPS.map((s, i) => (
+              <div key={s.title} className="how-it-works-card">
+                <div className="how-it-works-num">{i + 1}</div>
+                <div className="how-it-works-icon">{s.icon}</div>
+                <h3>{s.title}</h3>
+                <p className="muted">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- Testimonials (dark) ---------- */}
+      <section className="testimonials-v2">
+        <div className="container">
+          <div className="section-title center">
+            <h2 style={{ color: "#fff" }}>What people say about our services</h2>
+            <p style={{ color: "rgba(255,255,255,0.7)" }}>
+              Real feedback from customers who booked through FixKar.
+            </p>
+          </div>
+          <div className="testimonials-v2-grid">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="testimonial-v2-card">
+                <div className="rating" style={{ marginBottom: "0.6rem" }}>
+                  {"★".repeat(t.rating)}
+                  {"☆".repeat(5 - t.rating)}
+                </div>
+                <p className="testimonial-v2-quote">{t.quote}</p>
+                <div className="testimonial-v2-name">{t.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- Role cards ---------- */}
+      <div className="container" style={{ paddingBottom: "3rem" }}>
         <div className="role-grid mt-2" style={{ margin: "3rem auto 1rem" }}>
           <div className="card role-card" onClick={() => navigate("/register")}>
             <img src="/mascots/customer.svg" alt="" />

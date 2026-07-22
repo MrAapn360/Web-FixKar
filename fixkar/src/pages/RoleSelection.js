@@ -38,7 +38,7 @@ export default function RoleSelection() {
   return (
     <div className="page container">
       <div className="center" style={{ marginTop: "2rem" }}>
-        <img src="/app-icon.svg" alt="FixKar" style={{ width: 64, height: 64 }} />
+        <img src="/app-logo.png" alt="FixKar" style={{ width: 64, height: 64 }} />
       </div>
       <h2 className="center mt-1">How will you use FixKar?</h2>
       <p className="muted center">You can only choose once, so pick the one that fits.</p>

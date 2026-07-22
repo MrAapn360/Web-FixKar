@@ -45,7 +45,7 @@ export default function Login() {
       <div className="card form-card">
         <div className="center">
           <img
-            src="/app-icon.svg"
+            src="/app-logo.png"
             alt="FixKar"
             style={{ width: 56, height: 56 }}
           />

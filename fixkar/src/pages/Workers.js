@@ -16,8 +16,12 @@ function WorkerCard({ worker, onClick }) {
     <div className="card worker-card-v2" onClick={onClick}>
       <div className="worker-card-v2-top">
         <div className="worker-card-v2-avatar-frame">
-          {worker.photo_path ? (
-            <img src={worker.photo_path} alt={worker.full_name} className="worker-card-v2-photo" />
+          {worker.photo_url || worker.photo_path ? (
+            <img
+              src={worker.photo_url || worker.photo_path}
+              alt={worker.full_name}
+              className="worker-card-v2-photo"
+            />
           ) : (
             <div className="worker-card-v2-initials">{initials}</div>
           )}

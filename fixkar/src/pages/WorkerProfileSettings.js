@@ -148,39 +148,42 @@ export default function WorkerProfileSettings() {
   if (loadingProfile) return <div className="page-loading">Loading…</div>;
 
   return (
-    <div className="page container">
-      <h2>My Worker Profile</h2>
+    <div className="page">
+      <div className="profile-v2-wrap">
+        <h2 className="center">My Worker Profile</h2>
+        <p className="muted center mt-1" style={{ marginBottom: "1.5rem" }}>
+          Keep your service details up to date so customers can find you.
+        </p>
 
-      <div className="card mt-2" style={{ maxWidth: 560 }}>
-        <div className="name-row" style={{ gap: "1.25rem" }}>
-          {user?.photo_url || user?.photo_path ? (
-            <img
-              src={user.photo_url || user.photo_path}
-              alt="Profile"
-              className="avatar avatar-lg"
-              style={{ objectFit: "cover" }}
-            />
-          ) : (
-            <div className="avatar avatar-lg">{initials}</div>
-          )}
-          <div>
-            <button
-              type="button"
-              className="btn btn-outline btn-sm"
-              disabled={uploading}
-              onClick={() => fileInputRef.current?.click()}
-            >
-              {uploading ? "Uploading…" : "Change photo"}
-            </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              onChange={handlePhotoChange}
-            />
-            {photoError && <div className="form-error mt-1">{photoError}</div>}
+      <div className="card profile-v2-card mt-2">
+        <div className="profile-v2-avatar-row">
+          <div className="worker-profile-v2-avatar-frame">
+            {user?.photo_url || user?.photo_path ? (
+              <img
+                src={user.photo_url || user.photo_path}
+                alt="Profile"
+                className="worker-profile-v2-photo"
+              />
+            ) : (
+              <div className="worker-profile-v2-initials">{initials}</div>
+            )}
           </div>
+          <button
+            type="button"
+            className="btn btn-outline btn-sm mt-1"
+            disabled={uploading}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            {uploading ? "Uploading…" : "Change photo"}
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handlePhotoChange}
+          />
+          {photoError && <div className="form-error mt-1">{photoError}</div>}
         </div>
 
         <form onSubmit={handleSubmit} className="mt-2">
@@ -267,13 +270,13 @@ export default function WorkerProfileSettings() {
             </label>
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={saving}>
+          <button type="submit" className="btn btn-primary btn-block" disabled={saving}>
             {saving ? "Saving…" : "Save Changes"}
           </button>
         </form>
       </div>
 
-      <div className="card mt-2" style={{ maxWidth: 560, borderColor: "var(--danger)" }}>
+      <div className="card profile-v2-card mt-2" style={{ borderColor: "var(--danger)" }}>
         <h3 style={{ color: "var(--danger)" }}>Delete Account</h3>
         <p className="muted mt-1">
           This permanently removes your account and worker profile. Your booking, review, and
@@ -312,6 +315,7 @@ export default function WorkerProfileSettings() {
             </button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

@@ -1,0 +1,71 @@
+<svg width="520" height="620" viewBox="0 0 520 620" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hero-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6E8CFF"/>
+      <stop offset="100%" stop-color="#3355F5"/>
+    </linearGradient>
+    <linearGradient id="hero-head" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C98FF"/>
+      <stop offset="100%" stop-color="#4A69F5"/>
+    </linearGradient>
+    <linearGradient id="hero-overalls" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2140c9"/>
+      <stop offset="100%" stop-color="#16297a"/>
+    </linearGradient>
+    <radialGradient id="hero-glow" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#eaf0ff"/>
+      <stop offset="100%" stop-color="#eaf0ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="260" cy="260" r="240" fill="url(#hero-glow)"/>
+  <ellipse cx="260" cy="580" rx="150" ry="22" fill="#1B34C4" opacity="0.10"/>
+
+  <!-- legs -->
+  <rect x="190" y="430" width="55" height="150" rx="24" fill="url(#hero-overalls)"/>
+  <rect x="275" y="430" width="55" height="150" rx="24" fill="url(#hero-overalls)"/>
+  <rect x="180" y="560" width="75" height="26" rx="10" fill="#101528"/>
+  <rect x="265" y="560" width="75" height="26" rx="10" fill="#101528"/>
+
+  <!-- torso / overalls -->
+  <path d="M170 300 q90 -30 180 0 l14 150 q-104 34 -208 0 Z" fill="url(#hero-overalls)"/>
+  <rect x="225" y="300" width="70" height="60" rx="8" fill="#16297a"/>
+  <circle cx="260" cy="330" r="6" fill="#eaf0ff"/>
+
+  <!-- arms crossed -->
+  <path d="M180 320 q-40 20 -30 70 q10 35 55 40" fill="none" stroke="url(#hero-body)" stroke-width="34" stroke-linecap="round"/>
+  <path d="M340 320 q40 20 30 70 q-10 35 -55 40" fill="none" stroke="url(#hero-body)" stroke-width="34" stroke-linecap="round"/>
+  <circle cx="215" cy="420" r="20" fill="url(#hero-head)"/>
+  <circle cx="305" cy="420" r="20" fill="url(#hero-head)"/>
+
+  <!-- shirt collar -->
+  <path d="M225 300 L260 330 L295 300 L285 280 L235 280 Z" fill="#f4f6ff"/>
+
+  <!-- neck + head -->
+  <rect x="238" y="255" width="44" height="40" rx="16" fill="url(#hero-head)"/>
+  <circle cx="260" cy="205" r="72" fill="url(#hero-head)"/>
+
+  <!-- cap -->
+  <path d="M188 190 Q260 130 332 190 L322 215 Q260 175 198 215 Z" fill="#2140c9"/>
+  <ellipse cx="260" cy="192" rx="76" ry="18" fill="#2140c9"/>
+  <rect x="252" y="150" width="16" height="20" rx="4" fill="#16297a"/>
+
+  <!-- face -->
+  <circle cx="234" cy="212" r="9" fill="#0E1330"/>
+  <circle cx="286" cy="212" r="9" fill="#0E1330"/>
+  <path d="M232 244 Q260 264 288 244" fill="none" stroke="#0E1330" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- tool belt accent -->
+  <rect x="170" y="355" width="180" height="16" rx="8" fill="#16297a"/>
+  <rect x="245" y="352" width="30" height="22" rx="5" fill="#FFC94A"/>
+
+  <!-- floating tool icon accents -->
+  <g opacity="0.9">
+    <circle cx="420" cy="150" r="34" fill="#FFC94A"/>
+    <path d="M405 150 h30 M420 135 v30" stroke="#7a5a06" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.9">
+    <circle cx="70" cy="440" r="28" fill="#ff8a3d"/>
+    <path d="M58 440 h24 M70 428 v24" stroke="#7a3d0f" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>
