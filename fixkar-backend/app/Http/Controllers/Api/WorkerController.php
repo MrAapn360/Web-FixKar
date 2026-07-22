@@ -97,6 +97,7 @@ class WorkerController extends Controller
             'full_name' => $u->full_name,
             'city' => $u->city,
             'photo_path' => $u->photo_path,
+            'photo_url' => $u->photo_url,
             'category' => $p->category,
             'bio' => $p->bio,
             'skills' => $p->skills ?? [],

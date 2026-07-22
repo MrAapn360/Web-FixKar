@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -39,6 +41,30 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * Always include the computed photo_url alongside photo_path whenever a
+     * User is serialized (e.g. /me, /workers, booking payloads) — not just
+     * from the upload endpoint, so the frontend never has to build storage
+     * URLs itself.
+     *
+     * @var list<string>
+     */
+    protected $appends = [
+        'photo_url',
+    ];
+
+    /**
+     * Full public URL for the user's profile photo, or null if none is set.
+     */
+    protected function photoUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->photo_path
+                ? Storage::disk('public')->url($this->photo_path)
+                : null,
+        );
+    }
 
     /**
      * Get the attributes that should be cast.
