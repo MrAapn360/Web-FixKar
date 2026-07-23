@@ -4,6 +4,7 @@ import { CATEGORIES } from "../api/mockData";
 import { useAuth } from "../context/AuthContext";
 import { categoryMascot } from "../api/categoryImages";
 import AppShowcase from "../components/AppShowcase";
+import Footer from "../components/Footer";
 
 const STEPS = [
   {
@@ -247,6 +248,8 @@ export default function Landing() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

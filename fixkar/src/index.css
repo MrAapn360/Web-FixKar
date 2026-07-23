@@ -558,6 +558,129 @@ h3 {
   font-size: 0.9rem;
 }
 
+/* ---------- Site footer ---------- */
+.site-footer {
+  background: #0e1330;
+  color: rgba(255, 255, 255, 0.65);
+  padding: 3rem 0 1.5rem;
+  margin-top: 1rem;
+}
+.footer-cta {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-cta h3 {
+  color: #fff;
+  margin: 0;
+  font-size: 1.25rem;
+  max-width: 360px;
+}
+.footer-cta-form {
+  display: flex;
+  gap: 0;
+  flex: 1;
+  min-width: 280px;
+  max-width: 460px;
+}
+.footer-cta-form input {
+  flex: 1;
+  border: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+}
+.footer-cta-form input:focus {
+  outline: none;
+}
+.footer-cta-form .btn {
+  border-radius: 0 var(--radius) var(--radius) 0;
+  white-space: nowrap;
+}
+.footer-cta-success {
+  color: #7ce0a3;
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.footer-col h4 {
+  color: #fff;
+  font-size: 0.95rem;
+  margin: 0 0 0.9rem;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.footer-col a,
+.footer-link-disabled {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+.footer-col a:hover {
+  color: #fff;
+}
+.footer-contact-highlight {
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.footer-brand img {
+  width: 28px;
+  height: 28px;
+}
+.footer-copyright {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 900px) {
+  .footer-columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+  .footer-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 /* ---------- Category chips ---------- */
 .category-chips {
   display: flex;
